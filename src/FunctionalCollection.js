@@ -5,7 +5,7 @@
  * an item set, but instead generates new sets and commits
  * them.
  */
-export class Collection {
+export class FunctionalCollection {
     _itemsSetter;
     _itemsGetter;
     _keyGetter;
@@ -98,7 +98,7 @@ export class Collection {
      */
     _addItem(items, item) {
         items = Object.assign({}, items)
-        id = this._keyGetter(item)
+        let id = this._keyGetter(item)
         if (items[id]) {
             throw new Error(`Item with id ${id} already exists`)
         }

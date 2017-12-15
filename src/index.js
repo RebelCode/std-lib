@@ -1,1 +1,1 @@
-export {Collection} from './Collection';
+export {FunctionalCollection} from './FunctionalCollection';
