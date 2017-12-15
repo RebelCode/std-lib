@@ -23,106 +23,98 @@ function createNewItems() {
 /**
  * Create new collection based on some items.
  *
+ * @param getter
+ * @param setter
+ * @param id
  * @returns {FunctionalCollection}
  */
-function createNewCollection() {
-    return new FunctionalCollection(() => {
-        return items
-    }, (newItems) => {
-        items = newItems
-    }, (item) => {
-        return item.id
-    });
+function createNewCollection(getter, setter, id = null) {
+    id = id ? id : (item) => {
+        return item.id;
+    };
+    return new FunctionalCollection(getter, setter, id);
 }
 
-let items = {};
-let sampleCollection;
-
 describe('FunctionalCollection', function() {
-    /**
-     * This will create new items and new collection for each new test.
-     */
-    beforeEach(function(){
-        items = createNewItems();
-        sampleCollection = createNewCollection();
-    });
+    describe('functional', function () {
+        it('works like expected', function () {
+            let items = createNewItems();
+            let sampleCollection = createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
 
-    /**
-     * Test proper creation of collection.
-     */
-    describe('#constructor', function () {
-        it('should fail when not all requirements passed', function () {
-            assert.throws(function() {
-                new FunctionalCollection();
-            });
-        });
-
-        it('should not fail if parameters are passed right', function () {
-            assert.doesNotThrow(function() {
-                new FunctionalCollection(() => {
-                    return {};
-                }, (_items) => {
-                    // items = _items;
-                }, (item) => {
-                    return item.id;
-                });
-            });
-        });
-    });
-
-    /**
-     * Test collection's items getter.
-     */
-    describe('#getItems()', function() {
-        it('check items is the same in the store object and in the collection', function() {
+            /**
+             * Check collection's items getter.
+             */
             assert.deepEqual(sampleCollection.getItems(), items);
-        });
-    });
 
-    /**
-     * Test collection's item adding.
-     */
-    describe('#addItem(item)', function() {
-        it('add new item to the collection', function() {
+            /**
+             * Test collection has item checker.
+             */
+            assert.equal(sampleCollection.hasKey(127), true);
+
+            /**
+             * Test collection's item adding.
+             */
             sampleCollection.addItem({
                 id: 1
             });
             assert.equal(sampleCollection.hasKey(1), true);
-        });
 
-        it('add new item to the real store', function() {
-            sampleCollection.addItem({
-                id: 2
-            });
-            assert.equal(items[2].id, 2);
-        });
-    });
-
-    /**
-     * Test collection's ability to remove items.
-     */
-    describe('#removeItem(item)', function() {
-        it('remove item from the collection', function() {
+            /**
+             * Test collection's ability to remove items.
+             */
             sampleCollection.removeItem({
                 id: 1
             });
-            assert.equal(!sampleCollection.hasKey(1), true);
-        });
-
-        it('remove item from the real store', function() {
-            sampleCollection.removeItem({
-                id: 2
+            assert.equal(sampleCollection.hasKey(1), false);
+        })
+    });
+    describe('unit', function () {
+        /**
+         * Test proper creation of collection.
+         */
+        describe('#constructor', function () {
+            it('should fail when not all requirements passed', function () {
+                assert.throws(function() {
+                    createNewCollection();
+                });
             });
-            assert.equal(items[2], undefined);
-        });
-    });
 
-    /**
-     * Test collection has item checker.
-     */
-    describe('#hasItem(item)', function() {
-        it('check item is presented in the real store', function() {
-            assert.equal(sampleCollection.hasKey(127), true);
+            it('should not fail if parameters are passed right', function () {
+                assert.doesNotThrow(function() {
+                    let items = createNewItems();
+                    createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+                });
+            });
         });
-    });
+
+        /**
+         * Test collection's item adding.
+         */
+        describe('#addItem(item)', function() {
+            it('add new item to the real store', function() {
+                let items = createNewItems();
+                let sampleCollection = createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+
+                sampleCollection.addItem({
+                    id: 2
+                });
+
+                assert.equal(items[2].id, 2);
+            });
+        });
+
+        /**
+         * Test collection's ability to remove items.
+         */
+        describe('#removeItem(item)', function() {
+            it('remove item from the real store', function() {
+                let items = createNewItems();
+                let sampleCollection = createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+                sampleCollection.removeItem({
+                    id: 2
+                });
+                assert.equal(items[2], undefined);
+            });
+        });
+    })
 });
