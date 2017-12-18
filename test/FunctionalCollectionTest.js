@@ -49,23 +49,24 @@ describe('FunctionalCollection', function() {
             /**
              * Test collection has item checker.
              */
-            assert.equal(sampleCollection.hasKey(127), true);
+            assert.equal(sampleCollection.hasItem({
+                id: 127
+            }), true);
 
             /**
              * Test collection's item adding.
              */
-            sampleCollection.addItem({
+            let testItem = {
                 id: 1
-            });
-            assert.equal(sampleCollection.hasKey(1), true);
+            };
+            sampleCollection.addItem(testItem);
+            assert.equal(sampleCollection.hasItem(testItem), true);
 
             /**
              * Test collection's ability to remove items.
              */
-            sampleCollection.removeItem({
-                id: 1
-            });
-            assert.equal(sampleCollection.hasKey(1), false);
+            sampleCollection.removeItem(testItem);
+            assert.equal(sampleCollection.hasItem(testItem), false);
         })
     });
     describe('unit', function () {
