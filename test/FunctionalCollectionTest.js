@@ -1,25 +1,13 @@
 import {FunctionalCollection} from './../src/FunctionalCollection';
-
 var assert = require('assert');
 
-describe('FunctionalCollection', function() {
-    describe('#addItem(item)', function() {
-        it('should add new item to the collection', function() {
-            let collection = createNewFunctionalCollection();
-            collection.addItem({
-                id: 117
-            });
-            assert.equal(collection.hasKey(117), true);
-        });
-    });
-});
-
 /**
- * Create new simple collection fo testing purposes.
- * @returns {FunctionalCollection}
+ * Simple items collection.
+ *
+ * @returns {{123: {id: number}, 125: {id: number}, 127: {id: number}}}
  */
-function createNewFunctionalCollection () {
-    let items = {
+function createNewItems() {
+    return {
         123: {
             id: 123
         },
@@ -30,10 +18,104 @@ function createNewFunctionalCollection () {
             id: 127
         }
     };
+}
 
-    return new FunctionalCollection(() => {
-        return items
-    }, (newItems) => {
-        items = newItems
-    }, (item) => {return item.id})
-};
+/**
+ * Create new collection based on some items.
+ *
+ * @param getter
+ * @param setter
+ * @param id
+ * @returns {FunctionalCollection}
+ */
+function createNewCollection(getter, setter, id = null) {
+    id = id ? id : (item) => {
+        return item.id;
+    };
+    return new FunctionalCollection(getter, setter, id);
+}
+
+describe('FunctionalCollection', function() {
+    describe('functional', function () {
+        it('works like expected', function () {
+            let items = createNewItems();
+            let sampleCollection = createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+
+            /**
+             * Check collection's items getter.
+             */
+            assert.deepEqual(sampleCollection.getItems(), items);
+
+            /**
+             * Test collection has item checker.
+             */
+            assert.equal(sampleCollection.hasItem({
+                id: 127
+            }), true);
+
+            /**
+             * Test collection's item adding.
+             */
+            let testItem = {
+                id: 1
+            };
+            sampleCollection.addItem(testItem);
+            assert.equal(sampleCollection.hasItem(testItem), true);
+
+            /**
+             * Test collection's ability to remove items.
+             */
+            sampleCollection.removeItem(testItem);
+            assert.equal(sampleCollection.hasItem(testItem), false);
+        })
+    });
+    describe('unit', function () {
+        /**
+         * Test proper creation of collection.
+         */
+        describe('#constructor', function () {
+            it('should fail when not all requirements passed', function () {
+                assert.throws(function() {
+                    createNewCollection();
+                });
+            });
+
+            it('should not fail if parameters are passed right', function () {
+                assert.doesNotThrow(function() {
+                    let items = createNewItems();
+                    createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+                });
+            });
+        });
+
+        /**
+         * Test collection's item adding.
+         */
+        describe('#addItem(item)', function() {
+            it('add new item to the real store', function() {
+                let items = createNewItems();
+                let sampleCollection = createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+
+                sampleCollection.addItem({
+                    id: 2
+                });
+
+                assert.equal(items[2].id, 2);
+            });
+        });
+
+        /**
+         * Test collection's ability to remove items.
+         */
+        describe('#removeItem(item)', function() {
+            it('remove item from the real store', function() {
+                let items = createNewItems();
+                let sampleCollection = createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+                sampleCollection.removeItem({
+                    id: 2
+                });
+                assert.equal(items[2], undefined);
+            });
+        });
+    })
+});

@@ -70,11 +70,13 @@ export class FunctionalCollection {
     }
 
     /**
-     * @param key
+     * Check that given item in the collection.
+     *
+     * @param item
      * @returns {boolean}
      */
-    hasKey (key) {
-        return !!this._getItems()[key]
+    hasItem (item) {
+        return !!this._getItems()[this._keyGetter(item)]
     }
 
     /**
