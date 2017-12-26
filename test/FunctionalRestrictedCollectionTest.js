@@ -7,7 +7,13 @@ var assert = require('assert');
  * @return {*[]}
  */
 function createNewItems() {
-    return [123, 125, 127];
+    return [{
+        id: 123
+    }, {
+        id: 125
+    }, {
+        id: 127
+    }];
 }
 
 /**
@@ -47,7 +53,9 @@ describe('FunctionalRestrictedCollection', function() {
             /**
              * Test collection has item checker.
              */
-            assert.equal(sampleCollection.hasItem(127), true);
+            assert.equal(sampleCollection.hasItem({
+                id: 127
+            }), true);
 
             /**
              * Test collection's item adding.
@@ -56,7 +64,7 @@ describe('FunctionalRestrictedCollection', function() {
                 id: 1
             };
             sampleCollection.addItem(testItem);
-            assert.equal(sampleCollection.hasItem(testItem.id), true);
+            assert.equal(sampleCollection.hasItem(testItem), true);
 
             /**
              * Test collection's ability to remove items.
