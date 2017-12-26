@@ -149,7 +149,7 @@ describe('FunctionalArrayCollection', function() {
         });
 
         /**
-         * Test collection's items
+         * Test collection's method hasItem
          */
         describe('#hasItem(item)', function() {
             it('check item in collection', function() {
