@@ -1,7 +1,12 @@
 import {FunctionalArrayCollection} from './FunctionalArrayCollection'
 
 /**
- * Restricted collection
+ * Restricted collection.
+ *
+ * This collection add ability to check is
+ * item allowed to be added to the collection.
+ *
+ * Uses consumer's function for checking.
  *
  * @since [*next-version*]
  */
@@ -14,7 +19,7 @@ export class FunctionalRestrictedCollection extends FunctionalArrayCollection {
      * @param {Function} getItems
      * @param {Function} setItems
      * @param {Function} keyGetter
-     * @param {Function} itemAllowed
+     * @param {Function} itemAllowed Function that determines item allowed or not.
      */
     constructor (getItems, setItems, keyGetter, itemAllowed) {
         if (!itemAllowed) {
@@ -29,7 +34,8 @@ export class FunctionalRestrictedCollection extends FunctionalArrayCollection {
     /**
      * If item can be added to the collection
      *
-     * @param item
+     * @param {object} item Item to be checked is allowed or not.
+     * @return {Boolean} Is item allowed to be added to the collection.
      */
     isAllowed (item) {
         return this._itemAllowed(this.getItems(), item)
