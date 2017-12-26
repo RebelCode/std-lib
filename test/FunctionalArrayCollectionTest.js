@@ -135,5 +135,31 @@ describe('FunctionalArrayCollection', function() {
                 assert.equal(foundItem, undefined);
             });
         });
+
+        /**
+         * Test collection's items
+         */
+        describe('#getItems()', function() {
+            it('must return array', function() {
+                let items = createNewItems();
+                let sampleCollection = createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+
+                assert.equal(Array.isArray(sampleCollection.getItems()), true);
+            });
+        });
+
+        /**
+         * Test collection's items
+         */
+        describe('#hasItem(item)', function() {
+            it('check item in collection', function() {
+                let items = createNewItems();
+                let sampleCollection = createNewCollection(() => {return items;}, (newItems) => {items = newItems;});
+
+                assert.equal(sampleCollection.hasItem({
+                    id: 127
+                }), findById(items, 127).id !== undefined);
+            });
+        });
     })
 });
