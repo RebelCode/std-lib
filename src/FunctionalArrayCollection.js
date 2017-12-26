@@ -1,4 +1,4 @@
-import FunctionalCollection from './FunctionalCollection'
+import {FunctionalCollection} from './FunctionalCollection'
 
 /**
  * Functional collection that works with arrays under the hood
