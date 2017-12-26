@@ -21,13 +21,16 @@ export class FunctionalArrayCollection extends FunctionalCollection {
      */
     hasItem (item) {
         let foundItemIndex = null
-        let items = this.getItems()
+        let items = this._getItems()
+        let itemKey = this._keyGetter(item)
+
         for (let i in items) {
-            if (this._keyGetter(items[i]) === this._keyGetter(item)) {
+            if (this._keyGetter(items[i]) === itemKey) {
                 foundItemIndex = i
                 break
             }
         }
+
         return foundItemIndex !== null
     }
 
@@ -40,7 +43,7 @@ export class FunctionalArrayCollection extends FunctionalCollection {
      * @return {Object} The modified items set.
      */
     _addItem(items, item) {
-        items = this.getItems()
+        items = items.slice()
         items.push(item)
         return items
     }
@@ -55,8 +58,9 @@ export class FunctionalArrayCollection extends FunctionalCollection {
      */
     _removeItem (items, item) {
         let foundItemIndex = null
+        let itemKey = this._keyGetter(item)
         for (let i in items) {
-            if (this._keyGetter(items[i]) == this._keyGetter(item)) {
+            if (this._keyGetter(items[i]) == itemKey) {
                 foundItemIndex = i
                 break
             }
