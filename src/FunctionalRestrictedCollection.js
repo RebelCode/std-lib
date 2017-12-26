@@ -2,6 +2,8 @@ import {FunctionalArrayCollection} from './FunctionalArrayCollection'
 
 /**
  * Restricted collection
+ *
+ * @since [*next-version*]
  */
 export class FunctionalRestrictedCollection extends FunctionalArrayCollection {
     _itemAllowed;
