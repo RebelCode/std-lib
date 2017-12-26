@@ -34,17 +34,4 @@ export class FunctionalRestrictedCollection extends FunctionalArrayCollection {
     isAllowed (item) {
         return this._itemAllowed(this.getItems(), item)
     }
-
-    /**
-     * Add item key
-     *
-     * @param item
-     */
-    addItemId (item) {
-        if (!this.isAllowed(item)) {
-            throw new Error(`Cannot add item id to the collection`)
-        }
-
-        this.addItem(this._keyGetter(item))
-    }
 }
