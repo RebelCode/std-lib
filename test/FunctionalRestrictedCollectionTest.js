@@ -26,6 +26,9 @@ function createNewCollection(getter, setter, allowedChecker, id = null) {
     return new FunctionalRestrictedCollection(getter, setter, id, allowedChecker);
 }
 
+/**
+ * @since [*next-version*]
+ */
 describe('FunctionalRestrictedCollection', function() {
     describe('functional', function () {
         it('works like expected', function () {
