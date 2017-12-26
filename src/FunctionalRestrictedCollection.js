@@ -16,6 +16,8 @@ export class FunctionalRestrictedCollection extends FunctionalArrayCollection {
     /**
      * Constructor.
      *
+     * @since [*next-version*]
+     *
      * @param {Function} getItems
      * @param {Function} setItems
      * @param {Function} keyGetter
@@ -33,6 +35,8 @@ export class FunctionalRestrictedCollection extends FunctionalArrayCollection {
 
     /**
      * If item can be added to the collection
+     *
+     * @since [*next-version*]
      *
      * @param {object} item Item to be checked is allowed or not.
      * @return {Boolean} Is item allowed to be added to the collection.
