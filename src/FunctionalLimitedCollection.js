@@ -77,7 +77,7 @@ export class FunctionalLimitedCollection extends FunctionalArrayCollection {
      * @param {Array} items The item set.
      * @param {Object} item The item to add.
      *
-     * @return {Object} The modified items set.
+     * @return {Array} The modified items set.
      */
     _addItem (items, item) {
         if (items.length + 1 > this._limit) {
