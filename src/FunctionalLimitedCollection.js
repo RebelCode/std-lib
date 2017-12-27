@@ -48,11 +48,11 @@ export class FunctionalLimitedCollection extends FunctionalArrayCollection {
      *
      * @since [*next-version*]
      *
-     * @param {Function} getItems
-     * @param {Function} setItems
-     * @param {Function} keyGetter
-     * @param {Number} limit
-     * @param {String} overflowMode
+     * @param {Function} getItems The function used to retrieve the state of the item set.
+     * @param {Function} setItems The function used to commit the new state of the item set.
+     * @param {Function} keyGetter The function used to get item's key.
+     * @param {Number} limit Count of maximal items count in collection.
+     * @param {String} overflowMode Define how to deal with items overflow.
      */
     constructor (getItems, setItems, keyGetter, limit, overflowMode) {
         if (!limit) {
@@ -102,9 +102,10 @@ export class FunctionalLimitedCollection extends FunctionalArrayCollection {
      *
      * @since [*next-version*]
      *
-     * @param {Array} items
-     * @param {Object} item
-     * @return {Array}
+     * @param {Array} items The item set.
+     * @param {Object} item The item to add.
+     *
+     * @return {Array} New item set with added items.
      * @private
      */
     _addItemToStart (items, item) {
