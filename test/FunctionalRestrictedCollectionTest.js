@@ -40,6 +40,9 @@ function createNewCollection(getter, setter, allowedChecker, id = null) {
  * @since [*next-version*]
  */
 describe('FunctionalRestrictedCollection', function() {
+    /**
+     * @since [*next-version*]
+     */
     describe('functional', function () {
         /**
          * @since [*next-version*]
@@ -80,6 +83,9 @@ describe('FunctionalRestrictedCollection', function() {
             assert.equal(sampleCollection.hasItem(testItem), false);
         })
     });
+    /**
+     * @since [*next-version*]
+     */
     describe('unit', function () {
         /**
          * Test proper creation of collection.
@@ -87,12 +93,18 @@ describe('FunctionalRestrictedCollection', function() {
          * @since [*next-version*]
          */
         describe('#constructor', function () {
+            /**
+             * @since [*next-version*]
+             */
             it('should fail when not all requirements passed', function () {
                 assert.throws(function() {
                     createNewCollection();
                 });
             });
 
+            /**
+             * @since [*next-version*]
+             */
             it('should not fail if parameters are passed right', function () {
                 assert.doesNotThrow(function() {
                     let items = createNewItems();
@@ -111,6 +123,9 @@ describe('FunctionalRestrictedCollection', function() {
          * @since [*next-version*]
          */
         describe('#isAllowed(item)', function() {
+            /**
+             * @since [*next-version*]
+             */
             it('returns true is item can be added', function() {
                 let items = createNewItems();
                 let sampleCollection = createNewCollection(
@@ -122,6 +137,9 @@ describe('FunctionalRestrictedCollection', function() {
                 assert.equal(sampleCollection.isAllowed({id: 2}), true);
             });
 
+            /**
+             * @since [*next-version*]
+             */
             it('returns false if item cannot be added', function() {
                 let items = createNewItems();
                 let sampleCollection = createNewCollection(

@@ -18,9 +18,9 @@ export class FunctionalRestrictedCollection extends FunctionalArrayCollection {
      *
      * @since [*next-version*]
      *
-     * @param {Function} getItems
-     * @param {Function} setItems
-     * @param {Function} keyGetter
+     * @param {Function} getItems The function used to retrieve the state of the item set.
+     * @param {Function} setItems The function used to commit the new state of the item set.
+     * @param {Function} keyGetter The function used to get item's key.
      * @param {Function} itemAllowed Function that determines item allowed or not.
      */
     constructor (getItems, setItems, keyGetter, itemAllowed) {
