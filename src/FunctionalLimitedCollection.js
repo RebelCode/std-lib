@@ -1,6 +1,9 @@
 import {FunctionalArrayCollection} from './FunctionalArrayCollection'
 
 /**
+ * Throw Error if add new item to collection and collection
+ * hold too many items.
+ *
  * @since [*next-version*]
  *
  * @type {string}
@@ -8,6 +11,9 @@ import {FunctionalArrayCollection} from './FunctionalArrayCollection'
 export const FLC_OVERFLOW_THROW = 'throw';
 
 /**
+ * Start adding item to the collection from start if
+ * there are to many items in the collection.
+ *
  * @since [*next-version*]
  *
  * @type {string}
