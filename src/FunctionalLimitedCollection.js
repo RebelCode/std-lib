@@ -18,7 +18,7 @@ export const FLC_OVERFLOW_THROW = 'throw';
  *
  * @type {string}
  */
-export const FLC_OVERFLOW_START = 'start';
+export const FLC_OVERFLOW_PREPEND = 'prepend';
 
 /**
  * Functional limited collection that works with arrays under the hood
@@ -69,10 +69,19 @@ export class FunctionalLimitedCollection extends FunctionalArrayCollection {
             throw new Error(`Overflow mode for collection must be provided`)
         }
 
+        /*
+         * Check right overflow mode is provided
+         */
+        if([FLC_OVERFLOW_THROW, FLC_OVERFLOW_PREPEND].indexOf(overflowMode) === -1) {
+            throw new Error(`Wrong overflow mode is provided`)
+        }
+
         super(getItems, setItems, keyGetter)
 
         this._limit = limit
         this._overflowMode = overflowMode
+
+        this._checkOverflow()
     }
 
     /**
@@ -91,7 +100,7 @@ export class FunctionalLimitedCollection extends FunctionalArrayCollection {
                 case FLC_OVERFLOW_THROW:
                     throw new Error(`Limited collection can hold not more that ${this._limit} items`)
                     break
-                case FLC_OVERFLOW_START:
+                case FLC_OVERFLOW_PREPEND:
                     return this._addItemToStart(items, item)
                     break
             }
@@ -124,5 +133,28 @@ export class FunctionalLimitedCollection extends FunctionalArrayCollection {
         items = items.slice()
         items[this._lastAddedIndex] = item
         return items
+    }
+
+    /**
+     * Check collection is not overflowed when created.
+     *
+     * @since [*next-version*]
+     *
+     * @private
+     */
+    _checkOverflow () {
+        let items = this._getItems()
+
+        if(items.length <= this._limit)
+            return
+
+        switch (this._overflowMode) {
+            case FLC_OVERFLOW_THROW:
+                throw new Error(`Limited collection can hold not more that ${this._limit} items`)
+                break
+            case FLC_OVERFLOW_PREPEND:
+                this._setItems(items.slice(this._limit))
+                break
+        }
     }
 }

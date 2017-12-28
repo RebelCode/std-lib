@@ -1,4 +1,4 @@
-import {FunctionalLimitedCollection, FLC_OVERFLOW_START, FLC_OVERFLOW_THROW} from './../src/FunctionalLimitedCollection.js';
+import {FunctionalLimitedCollection, FLC_OVERFLOW_PREPEND, FLC_OVERFLOW_THROW} from './../src/FunctionalLimitedCollection.js';
 var assert = require('assert');
 
 /**
@@ -30,7 +30,7 @@ function createNewItems() {
  * @param mode
  * @returns {FunctionalLimitedCollection}
  */
-function createNewCollection(getter, setter, id = null, limit = 3, mode = FLC_OVERFLOW_START) {
+function createNewCollection(getter, setter, id = null, limit = 3, mode = FLC_OVERFLOW_PREPEND) {
     id = id ? id : (item) => {
         return item.id;
     };
@@ -82,7 +82,7 @@ describe('FunctionalLimitedCollection', function() {
                 (newItems) => {items = newItems;},
                 (item) => {return item.id;},
                 3,
-                FLC_OVERFLOW_START
+                FLC_OVERFLOW_PREPEND
             );
 
             /**
@@ -127,7 +127,23 @@ describe('FunctionalLimitedCollection', function() {
                         (newItems) => {items = newItems;},
                         (item) => {return item.id;},
                         3,
-                        FLC_OVERFLOW_START
+                        FLC_OVERFLOW_PREPEND
+                    );
+                });
+            });
+
+            /**
+             * @since [*next-version*]
+             */
+            it('should fail when too many items passed and mode is throw', function () {
+                assert.throws(function() {
+                    let items = createNewItems();
+                    createNewCollection(
+                        () => {return items;},
+                        (newItems) => {items = newItems;},
+                        (item) => {return item.id;},
+                        2,
+                        FLC_OVERFLOW_THROW
                     );
                 });
             });
@@ -169,7 +185,7 @@ describe('FunctionalLimitedCollection', function() {
                     (newItems) => {items = newItems;},
                     (item) => {return item.id;},
                     3,
-                    FLC_OVERFLOW_START
+                    FLC_OVERFLOW_PREPEND
                 );
 
                 sampleCollection.addItem({
