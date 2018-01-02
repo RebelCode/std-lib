@@ -69,19 +69,34 @@ export class FunctionalLimitedCollection extends FunctionalArrayCollection {
             throw new Error(`Overflow mode for collection must be provided`)
         }
 
+        super(getItems, setItems, keyGetter)
+
         /*
          * Check right overflow mode is provided
          */
-        if([FLC_OVERFLOW_THROW, FLC_OVERFLOW_PREPEND].indexOf(overflowMode) === -1) {
+        if(this._getAllowedOverflowModes().indexOf(overflowMode) === -1) {
             throw new Error(`Wrong overflow mode is provided`)
         }
-
-        super(getItems, setItems, keyGetter)
 
         this._limit = limit
         this._overflowMode = overflowMode
 
         this._checkOverflow()
+    }
+
+    /**
+     * Get list of allowed overflow modes.
+     *
+     * @since [*next-version*]
+     *
+     * @return {Array} Array of allowed overflow modes
+     * @private
+     */
+    _getAllowedOverflowModes () {
+        return [
+            FLC_OVERFLOW_THROW,
+            FLC_OVERFLOW_PREPEND
+        ]
     }
 
     /**
