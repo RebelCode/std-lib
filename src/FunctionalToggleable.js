@@ -4,7 +4,7 @@
  *
  * @since [*next-version*]
  */
-export class Toggleable {
+export class FunctionalToggleable {
     _stateSetter;
     _stateGetter;
 
