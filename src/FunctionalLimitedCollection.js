@@ -8,7 +8,7 @@ import {FunctionalArrayCollection} from './FunctionalArrayCollection'
  *
  * @type {string}
  */
-export const FLC_OVERFLOW_THROW = 'throw';
+export const FLC_OVERFLOW_THROW = 'throw'
 
 /**
  * Start adding item to the collection from start if
@@ -18,7 +18,7 @@ export const FLC_OVERFLOW_THROW = 'throw';
  *
  * @type {string}
  */
-export const FLC_OVERFLOW_PREPEND = 'prepend';
+export const FLC_OVERFLOW_PREPEND = 'prepend'
 
 /**
  * Functional limited collection that works with arrays under the hood
@@ -28,148 +28,148 @@ export const FLC_OVERFLOW_PREPEND = 'prepend';
  */
 export class FunctionalLimitedCollection extends FunctionalArrayCollection {
 
-    /**
-     * @var {Number} Count of maximal items count in collection.
-     *
-     * @since [*next-version*]
-     */
-    _limit;
+  /**
+   * @var {Number} Count of maximal items count in collection.
+   *
+   * @since [*next-version*]
+   */
+  _limit
 
-    /**
-     * @var {String} Define how to deal with items overflow.
-     *
-     * @since [*next-version*]
-     */
-    _overflowMode;
+  /**
+   * @var {String} Define how to deal with items overflow.
+   *
+   * @since [*next-version*]
+   */
+  _overflowMode
 
-    /**
-     * @var {Number} Index of last added items.
-     *
-     * @since [*next-version*]
-     */
-    _lastAddedIndex;
+  /**
+   * @var {Number} Index of last added items.
+   *
+   * @since [*next-version*]
+   */
+  _lastAddedIndex
 
-    /**
-     * Constructor.
-     *
-     * @since [*next-version*]
-     *
-     * @param {Function} getItems The function used to retrieve the state of the item set.
-     * @param {Function} setItems The function used to commit the new state of the item set.
-     * @param {Function} keyGetter The function used to get item's key.
-     * @param {Number} limit Count of maximal items count in collection.
-     * @param {String} overflowMode Define how to deal with items overflow.
-     */
-    constructor (getItems, setItems, keyGetter, limit, overflowMode) {
-        if (!limit) {
-            throw new Error(`Collection limit must be provided`)
-        }
-
-        if (!overflowMode) {
-            throw new Error(`Overflow mode for collection must be provided`)
-        }
-
-        super(getItems, setItems, keyGetter)
-
-        /*
-         * Check right overflow mode is provided
-         */
-        if(this._getAllowedOverflowModes().indexOf(overflowMode) === -1) {
-            throw new Error(`Wrong overflow mode is provided`)
-        }
-
-        this._limit = limit
-        this._overflowMode = overflowMode
-
-        this._checkOverflow()
+  /**
+   * Constructor.
+   *
+   * @since [*next-version*]
+   *
+   * @param {Function} getItems The function used to retrieve the state of the item set.
+   * @param {Function} setItems The function used to commit the new state of the item set.
+   * @param {Function} keyGetter The function used to get item's key.
+   * @param {Number} limit Count of maximal items count in collection.
+   * @param {String} overflowMode Define how to deal with items overflow.
+   */
+  constructor(getItems, setItems, keyGetter, limit, overflowMode) {
+    if (!limit) {
+      throw new Error(`Collection limit must be provided`)
     }
 
-    /**
-     * Get list of allowed overflow modes.
-     *
-     * @since [*next-version*]
-     *
-     * @return {Array} Array of allowed overflow modes
-     * @private
-     */
-    _getAllowedOverflowModes () {
-        return [
-            FLC_OVERFLOW_THROW,
-            FLC_OVERFLOW_PREPEND
-        ]
+    if (!overflowMode) {
+      throw new Error(`Overflow mode for collection must be provided`)
     }
 
-    /**
-     * Adds an item to a set.
-     *
-     * @since [*next-version*]
-     *
-     * @param {Array} items The item set.
-     * @param {Object} item The item to add.
-     *
-     * @return {Array} The modified items set.
-     */
-    _addItem (items, item) {
-        if (items.length + 1 > this._limit) {
-            switch (this._overflowMode) {
-                case FLC_OVERFLOW_THROW:
-                    throw new Error(`Limited collection can hold not more that ${this._limit} items`)
-                    break
-                case FLC_OVERFLOW_PREPEND:
-                    return this._addItemToStart(items, item)
-                    break
-            }
-        }
+    super(getItems, setItems, keyGetter)
 
-        items = items.slice()
-        items.push(item)
-        return items
+    /*
+     * Check right overflow mode is provided
+     */
+    if (this._getAllowedOverflowModes().indexOf(overflowMode) === -1) {
+      throw new Error(`Wrong overflow mode is provided`)
     }
 
-    /**
-     * Add item to collection's start, filling whole collection
-     * like a circle.
-     *
-     * @since [*next-version*]
-     *
-     * @param {Array} items The item set.
-     * @param {Object} item The item to add.
-     *
-     * @return {Array} New item set with added items.
-     * @private
-     */
-    _addItemToStart (items, item) {
-        if (this._lastAddedIndex === undefined || this._lastAddedIndex == items.length - 1) {
-            this._lastAddedIndex = -1
-        }
+    this._limit = limit
+    this._overflowMode = overflowMode
 
-        this._lastAddedIndex++
+    this._checkOverflow()
+  }
 
-        items = items.slice()
-        items[this._lastAddedIndex] = item
-        return items
+  /**
+   * Get list of allowed overflow modes.
+   *
+   * @since [*next-version*]
+   *
+   * @return {Array} Array of allowed overflow modes
+   * @private
+   */
+  _getAllowedOverflowModes() {
+    return [
+      FLC_OVERFLOW_THROW,
+      FLC_OVERFLOW_PREPEND
+    ]
+  }
+
+  /**
+   * Adds an item to a set.
+   *
+   * @since [*next-version*]
+   *
+   * @param {Array} items The item set.
+   * @param {Object} item The item to add.
+   *
+   * @return {Array} The modified items set.
+   */
+  _addItem(items, item) {
+    if (items.length + 1 > this._limit) {
+      switch (this._overflowMode) {
+        case FLC_OVERFLOW_THROW:
+          throw new Error(`Limited collection can hold not more that ${this._limit} items`)
+          break
+        case FLC_OVERFLOW_PREPEND:
+          return this._addItemToStart(items, item)
+          break
+      }
     }
 
-    /**
-     * Check collection is not overflowed when created.
-     *
-     * @since [*next-version*]
-     *
-     * @private
-     */
-    _checkOverflow () {
-        let items = this._getItems()
+    items = items.slice()
+    items.push(item)
+    return items
+  }
 
-        if(items.length <= this._limit)
-            return
-
-        switch (this._overflowMode) {
-            case FLC_OVERFLOW_THROW:
-                throw new Error(`Limited collection can hold not more that ${this._limit} items`)
-                break
-            case FLC_OVERFLOW_PREPEND:
-                this._setItems(items.slice(this._limit))
-                break
-        }
+  /**
+   * Add item to collection's start, filling whole collection
+   * like a circle.
+   *
+   * @since [*next-version*]
+   *
+   * @param {Array} items The item set.
+   * @param {Object} item The item to add.
+   *
+   * @return {Array} New item set with added items.
+   * @private
+   */
+  _addItemToStart(items, item) {
+    if (this._lastAddedIndex === undefined || this._lastAddedIndex == items.length - 1) {
+      this._lastAddedIndex = -1
     }
+
+    this._lastAddedIndex++
+
+    items = items.slice()
+    items[this._lastAddedIndex] = item
+    return items
+  }
+
+  /**
+   * Check collection is not overflowed when created.
+   *
+   * @since [*next-version*]
+   *
+   * @private
+   */
+  _checkOverflow() {
+    let items = this._getItems()
+
+    if (items.length <= this._limit)
+      return
+
+    switch (this._overflowMode) {
+      case FLC_OVERFLOW_THROW:
+        throw new Error(`Limited collection can hold not more that ${this._limit} items`)
+        break
+      case FLC_OVERFLOW_PREPEND:
+        this._setItems(items.slice(this._limit))
+        break
+    }
+  }
 }
