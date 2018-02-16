@@ -7,7 +7,8 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: __dirname + "/dist",
-        filename: "std-lib.js"
+        filename: "std-lib.js",
+        libraryTarget: 'umd'
     },
     plugins: debug ? [] : [
         new webpack.optimize.DedupePlugin(),
