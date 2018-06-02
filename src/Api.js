@@ -1,6 +1,16 @@
+/**
+ * Api abstraction to make interactions with backend using
+ * some http client.
+ *
+ * @since [*next-version*]
+ *
+ * @class Api
+ */
 export default class Api {
   /**
    * Request cache, allows to cache requests result.
+   *
+   * @since [*next-version*]
    *
    * @property {RequestCache}
    */
@@ -9,8 +19,10 @@ export default class Api {
   /**
    * Api constructor
    *
-   * @param {object} httpClient Http client like axios
-   * @param {object} config
+   * @since [*next-version*]
+   *
+   * @param {HttpClient} httpClient Http promise-based client
+   * @param {Object<string, {method: String, endpoint: String}>} config
    * @param {RequestCache} cache Requests caching implementation.
    */
   constructor (httpClient, config, cache) {
@@ -20,10 +32,13 @@ export default class Api {
   }
 
   /**
-   * Prepare params before submit
+   * Prepare params before submit.
    *
-   * @param params
-   * @return {FormData}
+   * @since [*next-version*]
+   *
+   * @param {object} params Params that will be send to Api.
+   *
+   * @return {object} Prepared params.
    */
   prepareParams (params) {
     return params

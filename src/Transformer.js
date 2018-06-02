@@ -1,13 +1,25 @@
+/**
+ * Class for changing object in some way using list of rules
+ * that applied to given object in order.
+ *
+ * @since [*next-version*]
+ *
+ * @class Transformer
+ */
 export default class Transformer {
   /**
    * List of rules to transform.
    *
-   * @type {{}}
+   * @since [*next-version*]
+   *
+   * @type {Object.<string, TransformerRuleCallback>}
    */
   rules = {}
 
   /**
    * Transformer constructor.
+   *
+   * @since [*next-version*]
    *
    * @param {object} dependencies List of dependencies.
    */
@@ -19,6 +31,8 @@ export default class Transformer {
 
   /**
    * Transform given model according rules.
+   *
+   * @since [*next-version*]
    *
    * @param {object} model Some model to transform
    * @param {object} payload Additional data to use while transformation
