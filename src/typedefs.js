@@ -29,9 +29,7 @@
  *
  * @property {string} method Http method
  * @property {string} url URL to send request on
- * @property {string} baseUrl Bse URL
  * @property {object} data Data that will be sent
- * @property {object} params URL params that will be sent
  */
 
 /**
