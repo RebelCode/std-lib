@@ -27,9 +27,9 @@
  *
  * @typedef {Object} HttpRequestConfig
  *
- * @property {string} method Http method
- * @property {string} url URL to send request on
- * @property {object} [data={}] Data that will be sent
+ * @property {String} method Http method
+ * @property {String} url URL to send request on
+ * @property {String|Object} [data] Data that will be sent
  */
 
 /**
