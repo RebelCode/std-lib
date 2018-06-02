@@ -29,7 +29,7 @@
  *
  * @property {string} method Http method
  * @property {string} url URL to send request on
- * @property {object} data Data that will be sent
+ * @property {object} [data={}] Data that will be sent
  */
 
 /**
