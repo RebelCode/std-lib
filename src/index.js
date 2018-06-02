@@ -4,3 +4,6 @@ export {FunctionalLimitedCollection, FLC_OVERFLOW_THROW, FLC_OVERFLOW_PREPEND} f
 export {FunctionalRestrictedCollection} from './FunctionalRestrictedCollection'
 export {FunctionalToggleable} from './FunctionalToggleable'
 export {Page} from './Page'
+export {Api} from './Api'
+export {RequestCache} from './RequestCache'
+export {Transformer} from './Transformer'
