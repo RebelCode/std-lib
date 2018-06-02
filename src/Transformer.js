@@ -6,7 +6,7 @@
  *
  * @class Transformer
  */
-export default class Transformer {
+export class Transformer {
   /**
    * List of rules to transform.
    *

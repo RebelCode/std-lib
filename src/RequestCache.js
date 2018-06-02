@@ -4,7 +4,7 @@
  *
  * @since [*next-version*]
  */
-export default class RequestCache {
+export class RequestCache {
   /**
    * Inner cache object.
    *

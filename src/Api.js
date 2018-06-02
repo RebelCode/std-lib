@@ -6,7 +6,7 @@
  *
  * @class Api
  */
-export default class Api {
+export class Api {
   /**
    * Request cache, allows to cache requests result.
    *
