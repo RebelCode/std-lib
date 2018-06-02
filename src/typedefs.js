@@ -4,18 +4,42 @@
  * @since [*next-version*]
  *
  * @typedef {Object} HttpClient
- * @property {Function} request Perform request to given URL
- * @property {Function} get Perform get request to given URL
- * @property {Function} post Perform post request to given URL
- * @property {Function} patch Perform patch request to given URL
- * @property {Function} put Perform put request to given URL
- * @property {Function} delete Perform delete request to given URL
+ *
+ * @property {RequestHttpFunction} request Perform request to given URL
+ */
+
+/**
+ * Request function in http client.
+ *
+ * @since [*next-version*]
+ *
+ * @function RequestHttpFunction
+ *
+ * @param {HttpRequestConfig} config Request configuration
+ *
+ * @return {Promise<any>}
+ */
+
+/**
+ * Configuration object for request function.
+ *
+ * @since [*next-version*]
+ *
+ * @typedef {Object} HttpRequestConfig
+ *
+ * @property {string} method Http method
+ * @property {string} url URL to send request on
+ * @property {string} baseUrl Bse URL
+ * @property {object} data Data that will be sent
+ * @property {object} params URL params that will be sent
  */
 
 /**
  * Rule to apply in transformer.
  *
  * @callback TransformerRuleCallback
+ *
+ * @since [*next-version*]
  *
  * @param {Object} model Model to transform
  *

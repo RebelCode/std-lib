@@ -17,19 +17,6 @@ export default class Transformer {
   rules = {}
 
   /**
-   * Transformer constructor.
-   *
-   * @since [*next-version*]
-   *
-   * @param {object} dependencies List of dependencies.
-   */
-  constructor (dependencies = {}) {
-    for (let key in dependencies) {
-      this[key] = dependencies[key]
-    }
-  }
-
-  /**
    * Transform given model according rules.
    *
    * @since [*next-version*]
