@@ -11,8 +11,6 @@ import {FunctionalArrayCollection} from './FunctionalArrayCollection'
  * @since [*next-version*]
  */
 export class FunctionalRestrictedCollection extends FunctionalArrayCollection {
-  _itemAllowed
-
   /**
    * Constructor.
    *

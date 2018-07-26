@@ -5,9 +5,6 @@
  * @since [*next-version*]
  */
 export class FunctionalToggleable {
-  _stateSetter
-  _stateGetter
-
   constructor(set, get) {
     this._stateSetter = set
     this._stateGetter = get

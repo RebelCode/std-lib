@@ -6,24 +6,6 @@
  */
 export class RequestCache {
   /**
-   * Inner cache object.
-   *
-   * @since [*next-version*]
-   *
-   * @type {object}
-   */
-  _cache = {}
-
-  /**
-   * Function for getting hash code.
-   *
-   * @since [*next-version*]
-   *
-   * @type {Function}
-   */
-  hashCode
-
-  /**
    * Request cache constructor.
    *
    * @since [*next-version*]
@@ -32,6 +14,7 @@ export class RequestCache {
    */
   constructor (hashCode) {
     this.hashCode = hashCode
+    this._cache = {}
   }
 
   /**

@@ -7,14 +7,16 @@
  * @class Transformer
  */
 export class Transformer {
-  /**
-   * List of rules to transform.
-   *
-   * @since [*next-version*]
-   *
-   * @type {Object.<string, TransformerRuleCallback>}
-   */
-  rules = {}
+  constructor () {
+    /**
+     * List of rules to transform.
+     *
+     * @since [*next-version*]
+     *
+     * @type {Object.<string, TransformerRuleCallback>}
+     */
+    this.rules = {}
+  }
 
   /**
    * Transform given model according rules.
