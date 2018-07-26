@@ -8,15 +8,6 @@
  */
 export class Api {
   /**
-   * Request cache, allows to cache requests result.
-   *
-   * @since [*next-version*]
-   *
-   * @property {RequestCache}
-   */
-  cache
-
-  /**
    * Api constructor
    *
    * @since [*next-version*]

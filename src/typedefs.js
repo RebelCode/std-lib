@@ -43,3 +43,29 @@
  *
  * @return {Object} Transformed model
  */
+
+/**
+ * Create datetime in a timezone.
+ *
+ * @since [*next-version*]
+ *
+ * @function CreateInTimezoneFunction
+ *
+ * @param {Date|string|moment} value Datetime that should be created in a timezone.
+ * @param {string} tz String representing timezone, including UTC+${offset} format.
+ *
+ * @return {moment}
+ */
+
+/**
+ * Parse datetime in a timezone.
+ *
+ * @since [*next-version*]
+ *
+ * @function ParseInTimezoneFunction
+ *
+ * @param {Date|string|moment} value Any value that moment can accept into constructor.
+ * @param {string} tz String representing timezone, including UTC+${offset} format.
+ *
+ * @return {moment} Given datetime in a timezone (local time remains the same).
+ */

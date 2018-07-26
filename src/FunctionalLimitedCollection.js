@@ -27,28 +27,6 @@ export const FLC_OVERFLOW_PREPEND = 'prepend'
  * @since [*next-version*]
  */
 export class FunctionalLimitedCollection extends FunctionalArrayCollection {
-
-  /**
-   * @var {Number} Count of maximal items count in collection.
-   *
-   * @since [*next-version*]
-   */
-  _limit
-
-  /**
-   * @var {String} Define how to deal with items overflow.
-   *
-   * @since [*next-version*]
-   */
-  _overflowMode
-
-  /**
-   * @var {Number} Index of last added items.
-   *
-   * @since [*next-version*]
-   */
-  _lastAddedIndex
-
   /**
    * Constructor.
    *

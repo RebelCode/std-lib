@@ -6,10 +6,6 @@
  * them.
  */
 export class FunctionalCollection {
-  _itemsSetter
-  _itemsGetter
-  _keyGetter
-
   /**
    * @param {Function} getItems The function used to retrieve the state of the item set.
    * @param {Function} setItems The function used to commit the new state of the item set.
